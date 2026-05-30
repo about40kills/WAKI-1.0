@@ -1,0 +1,96 @@
+Prompt updates (done)
+Relatable ADPA / WAKI framing and everyday Ghana contexts (betting, relationships, school stress, family money, code-switching) are now in:
+
+src/services/llm/systemPrompts/base.ts — global tone, contexts, risk hints for loss/bet/heartbreak vs crisis
+src/services/llm/systemPrompts/twi.ts — Twi idioms + mixed Twi/Pidgin/English examples (“bet chop me”, cheating, school stress)
+Build order (as if constructing the app)
+Phase 0 — Baseline quality (keep improving while you build)
+
+Harden clinical JSON output and risk behaviour (already central in base.ts; keep testing edge cases).
+Enrich system prompts with real user phrases (ongoing; we started this).
+Add .env.example + document keys in README (small, high leverage for collaborators).
+Phase 1 — Onboarding and trust
+4. Consent screen: three toggles + short “what this means” (local mood, anonymised improvement data, optional cloud) — match privacy story in the doc.
+5. first-checkin onboarding screen: emotion wheel right after consent → first mood row in DB.
+6. Safeguard line in three places: consent, collapsible strip on conversation, Settings → About (when Settings exists).
+
+Phase 2 — Core daily loop
+7. Home: today’s mood, streak, “talk to me”, shortcut to last coping tool, daily check-in nudge if missing.
+8. Check-in polish: follow-up + CheckinSummary with “Talk about it” → new conversation.
+9. Conversation UX: mode label (listening / guiding), optional TTS mute toggle, better voice overlay (timer, copy).
+
+Phase 3 — Offline and honesty about connectivity
+10. expo-network + OfflineBanner; block or degrade AI when offline, keep toolkit/check-in usable.
+11. PermissionGate for mic (and later location/notifications).
+
+Phase 4 — Toolkit (doc-complete)
+12. Add three missing coping tools (body scan, anger walk, sleep PMR) in copingTools + JSON in content/.
+13. Toolkit filters (“racing thoughts”, anger, sleep, etc.).
+14. Bundled MP3s (start with tw + en per roadmap in the PDF, then expand).
+15. Optional: waveform on player when you have stable audio metering.
+
+Phase 5 — Learn tab
+16. learn.tsx + learn/[moduleId].tsx.
+17. psychoedModules.ts + 7 JSON modules; wire LearnModuleCard, progress, bookmark.
+18. WiFi-first download + offline badge (can be phased: “bundled only” first, download later).
+
+Phase 6 — Stories tab
+19. stories.tsx + StoryCard + 5 story JSONs (Kwame exam pressure, market grief, etc. — align with doc archetypes).
+20. Read / listen if you add narration audio.
+
+Phase 7 — Profile and mood insight
+21. Mood calendar (month grid by dominant emotion).
+22. Streak and optional quote/affirmation on home.
+23. Settings hub: privacy, notifications, language, data export, delete all data.
+
+Phase 8 — Notifications
+24. expo-notifications + checkinScheduler: daily time, open check-in on tap, reschedule on change.
+
+Phase 9 — Crisis and safety (doc depth)
+25. Crisis screen: explicit yes / no / not sure safety path; align CrisisBar with moderate (or your chosen mapping).
+26. expo-location + bundled CHPS JSON + chpsLocator on crisis screen (permission-gated, on-device only).
+
+Phase 10 — Languages (big vertical slices)
+27. Extend LanguageCode, LANGUAGES, emotions, i18n JSON for Pidgin → Ga → Ewe → Dagbani (order by your user research; Pidgin often pairs with students).
+28. language-select: 6 languages + sample audio on tap.
+29. Per-language LLM addenda (pidgin.ts, ga.ts, …) and TTS path (Khaya vs expo-speech per language).
+
+Phase 11 — Architecture upgrades
+30. Parallel crisisDetectionService (last 3 user turns, async).
+31. modeClassifier + conversationService modes.
+32. Claude streaming + StreamingText + sentence-chunk TTS (larger change).
+33. khaya/translation.ts if the model often answers in English for Twi-first users.
+
+Phase 12 — Data model and optional cloud
+34. Migrate user_profile for consent_train, consent_cloud, notification columns.
+35. useConsent, privacyUtils, optional Supabase only when toggles are on.
+
+Phase 13 — Assets and polish
+36. Nunito via expo-font, custom icons, onboarding illustrations, UI sounds.
+37. eas.json and store-ready icons/splash set.
+
+Phase 14 — Doc and compliance
+38. Add missing docs/ files from the PDF (privacy, data collection, deployment).
+39. Roadmap items from Section 12 of the PDF (clinical review, MHA, etc.) as separate milestones.
+
+If you tell me your next slice (e.g. “Phase 1 only” or “home + first-checkin”), I can implement the next chunk in the repo step by step.
+
+start from phase 1-13
+
+
+
+make sure the system prompts is rich enough(anything anyone can literally think off add it)
+
+
+
+
+
+forget this
+
+Add .env.example + document keys in README (small, high leverage for collaborators).
+
+Implementing phases 1–13 (excluding .env.example and README key docs). Exploring the codebase and applying changes systematically.
+
+
+
+make sure the llm and system prompts transliteration to the various languages are right(verify sources online) 
