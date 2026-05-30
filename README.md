@@ -1,25 +1,7 @@
 # waki
 
 ai-powered mental health companion for ghana. twi & english. voice-first. offline-ready.
-
 ---
-
-## quick start
-
-```bash
-# install dependencies
-npm install
-
-# set up environment variables
-cp .env.example .env
-
-# run the app
-npx expo start
-```
-
-add your api keys to `.env`:
-- `KHAYA_API_KEY` — [ghananlp.org](https://ghananlp.org)
-- `ANTHROPIC_API_KEY` — [console.anthropic.com](https://console.anthropic.com)
 
 ## how it works
 
